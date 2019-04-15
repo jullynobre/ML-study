@@ -28,6 +28,18 @@ func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [D
 	//		w.append(Double.random(in: -1.0...1.0))
 	//	}
 	
+//	
+//	let input = [2,4,5]
+//	let wOld = [[0, 1, 2], [0,2,3], [1,3,4]]
+//	let wNew = []
+//	for perceptronWeights in wOld {
+//		
+//		for weight in perceptronWeights {
+//			
+//		}
+//	}
+	
+	
 	var epochs = 0
 	
 	for _ in 0...epochsNumber {
@@ -40,6 +52,7 @@ func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [D
 				let error = data.label - y
 				
 				for i in 0..<w.count {
+					
 					w[i] += learningRate * error * data.input[i]
 				}
 			}
@@ -50,6 +63,8 @@ func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [D
 		}
 		epochs += 1
 	}
+	
+	
 	epochs
 	
 	return w
@@ -67,7 +82,7 @@ func test(_ testingData: [DataObject], _ weigths: [Double]) -> Double {
 		print("Label: \(d) - Prediction: \(y)")
 	}
 	
-    return Double(hit) / Double(testingData.count)
+	return Double(hit) / Double(testingData.count)
 }
 
 
