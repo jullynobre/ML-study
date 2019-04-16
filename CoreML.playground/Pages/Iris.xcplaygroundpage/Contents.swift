@@ -50,9 +50,9 @@ func train(dataArr: [Pattern], learningRate: Double, epochsNumber: Int) -> [[Dou
 	var w: [[Double]] = [[], [], []]
 	
 	for _ in 0..<dataArr[0].input.count {
-		w[0].append(Double.random(in: -1.0...1.0))
-		w[1].append(Double.random(in: -1.0...1.0))
-		w[2].append(Double.random(in: -1.0...1.0))
+		w[0].append(Double.random(in: 1.4...1.6))
+		w[1].append(Double.random(in: 1.4...1.6))
+		w[2].append(Double.random(in: 1.4...1.6))
 	}
 	
 	for _ in 0..<epochsNumber {
