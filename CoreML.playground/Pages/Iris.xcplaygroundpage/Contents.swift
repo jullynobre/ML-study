@@ -28,33 +28,6 @@ func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [D
 		w.append(Double.random(in: -1.0...1.0))
 	}
 	
-	//
-	//	let input = [2,4,5]
-	//	let wOld = [[0, 1, 2], [0,2,3], [1,3,4]]
-	//	let wNew = []
-	//	for perceptronWeights in wOld {
-	//
-	//		for weight in perceptronWeights {
-	//
-	//		}
-	//	}
-	
-	/*
-	
-	u = wTx
-	
-	em teoria é como se o vetor de entrada fosse apresentado ao mesmo tempo nos 3 neurônios
-	
-	rede com c neuronios onde c é o número de classes para o problema
-	cada neuronio tem o seu vetor de pesos
-	for para o numero de neuronios, for para o numero de entradas
-	cada neuronio tem um erro diferente
-	
-	wji(t) = wji(t-1) + learningRate * ej * xi
-	
-	*/
-	
-	
 	var epochs = 0
 	
 	for _ in 0...epochsNumber {

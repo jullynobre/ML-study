@@ -4,7 +4,7 @@
         <page name='DMC'/>
         <page name='Perceptron'/>
         <page name='Iris-setosa'/>
-        <page name='Perceptron multilayer'/>
+        <page name='Perceptron-Multilayer'/>
         <page name='Iris'/>
     </pages>
 </playground>

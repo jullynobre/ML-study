@@ -14,7 +14,6 @@ struct DataObject {
 
 func predict(_ input: [Double], _ w: [Double]) -> Double {
 	var u: Double = 0
-	
 	for i in 0..<input.count {
 		u += input[i] * w[i]
 	}
@@ -25,11 +24,7 @@ func predict(_ input: [Double], _ w: [Double]) -> Double {
 func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [Double]{
 	var w: [Double] = []
 	
-	for _ in 0..<dataArr[0].input.count {
-		w.append(Double.random(in: -1.0...1.0))
-	}
-	
-	var epochs = 0
+	for _ in 0..<dataArr[0].input.count { w.append(Double.random(in: -1.0...1.0)) }
 	
 	for _ in 0..<epochsNumber {
 		var errors = 0
@@ -45,23 +40,12 @@ func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [D
 				}
 			}
 		}
-		
-		if errors == 0 {
-			return w
-		}
-		epochs += 1
+		if errors == 0 { return w }
 	}
-	
-	epochs
 	
 	return w
 }
 
-// Aqui devemos computar a taxa de acertos para a base de teste
-//func test(_ testingData: [Data], _ weigths: [Double]) -> Double {
-//
-//    return 0.0
-//}
 
 let dataArr = [DataObject(input: [1.0, 0.0], label: 1.0),
 			   DataObject(input: [0.0, 0.0], label: 0.0),
@@ -74,3 +58,32 @@ predict([0, 0], weights)
 predict([0, 1], weights)
 predict([1, 0], weights)
 predict([1, 1], weights)
+
+
+
+
+//
+//	let input = [2,4,5]
+//	let wOld = [[0, 1, 2], [0,2,3], [1,3,4]]
+//	let wNew = []
+//	for perceptronWeights in wOld {
+//
+//		for weight in perceptronWeights {
+//
+//		}
+//	}
+
+/*
+
+u = wTx
+
+em teoria é como se o vetor de entrada fosse apresentado ao mesmo tempo nos 3 neurônios
+
+rede com c neuronios onde c é o número de classes para o problema
+cada neuronio tem o seu vetor de pesos
+for para o numero de neuronios, for para o numero de entradas
+cada neuronio tem um erro diferente
+
+wji(t) = wji(t-1) + learningRate * ej * xi
+
+*/
