@@ -22,11 +22,11 @@ func predict(_ input: [Double], _ w: [Double]) -> Double {
 }
 
 func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [Double]{
-	var w: [Double] = Array(repeating: Double.zero, count: dataArr.first?.input.count ?? 2)
+	var w: [Double] = []
 	
-	//	for _ in 0..<dataArr[0].input.count {
-	//		w.append(Double.random(in: -1.0...1.0))
-	//	}
+	for _ in 0..<dataArr[0].input.count {
+		w.append(Double.random(in: -1.0...1.0))
+	}
 	
 	var epochs = 0
 	
@@ -79,7 +79,7 @@ patternsArr.remove(at: 150)
 var dataArr: [DataObject] = []
 for pattern in patternsArr {
 	let patternSplt = pattern.components(separatedBy: ",")
-	let dataLabel = patternSplt[4] == "Iris-virginica" ? 1.0 : 0.0
+	let dataLabel = patternSplt[4] == "Iris-setosa" ? 1.0 : 0.0
 	let dataInput = [Double(patternSplt[0])!,
 					 Double(patternSplt[1])!,
 					 Double(patternSplt[2])!,
