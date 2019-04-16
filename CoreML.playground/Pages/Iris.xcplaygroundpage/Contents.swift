@@ -125,11 +125,13 @@ for pattern in patternsArr {
 	dataArr.append(Pattern(input: dataInput, label: dataLabel))
 }
 
-dataArr.shuffle()
+for _ in 1...10{
+	dataArr.shuffle()
 
-let trainDataArr = Array(dataArr[0..<120])
-let testDataArr = Array(dataArr[120..<150])
+	let trainDataArr = Array(dataArr[0..<120])
+	let testDataArr = Array(dataArr[120..<150])
 
-let weights = train(dataArr: trainDataArr, learningRate: 0.1, epochsNumber: 80)
+	let weights = train(dataArr: trainDataArr, learningRate: 0.1, epochsNumber: 80)
 
-print("\n\(test(testDataArr, weights) * 100)%")
+	print("\n\(test(testDataArr, weights) * 100)%")
+}
