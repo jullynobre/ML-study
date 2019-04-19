@@ -1,10 +1,9 @@
-//: Playground - noun: a place where people can play
-import UIKit
 import PlaygroundSupport
+import Foundation
 
 struct Pattern {
 	let input: [Double]
-	let label: [Double] // 3 values
+	let label: [Double] // 3 classes
 	
 	init(input: [Double], label: [Double]) {
 		self.input = input
@@ -27,19 +26,10 @@ func predict(_ input: [Double], _ w: [[Double]]) -> [Double] {
 	
 	let sum = u[0] + u[1] + u[2]
 	if sum != 1.0 {
-		var biggerI = 0
-		var bigger = uArr[0]
-		for i in 1..<uArr.count {
-			if uArr[i] > bigger {
-				bigger = uArr[i]
-				biggerI = i
-			}
-		}
-		u[biggerI] = 1.0
+		let bigger = uArr.max()
+		
 		for i in 0..<u.count {
-			if i != biggerI {
-				u[i] = 0.0
-			}
+			u[i] = uArr[i] != bigger ? 0.0 : 1.0
 		}
 	}
 	
@@ -96,26 +86,30 @@ func test(_ testingData: [Pattern], _ weigths: [[Double]]) -> Double {
 	return Double(hit) / Double(testingData.count)
 }
 
-let data = try Data(contentsOf: Bundle.main.url(forResource: "iris", withExtension: "data")!)
+let data = try Data(contentsOf: Bundle.main.url(forResource: "column_3C", withExtension: "dat")!)
 let dataStr = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
 var patternsArr = dataStr.components(separatedBy: "\n")
-patternsArr.remove(at: 150)
+patternsArr.remove(at: 310)
 
 var dataArr: [Pattern] = []
+
 for pattern in patternsArr {
-	let patternSplt = pattern.components(separatedBy: ",")
+	let patternSplt = pattern.components(separatedBy: " ")
 
 	let dataInput = [Double(patternSplt[0])!,
 					 Double(patternSplt[1])!,
 					 Double(patternSplt[2])!,
-					 Double(patternSplt[3])!]
-	var dataLabel: [Double] = [0.0, 0.0, 0.0]
+					 Double(patternSplt[3])!,
+					 Double(patternSplt[4])!,
+					 Double(patternSplt[5])!]
 	
-	switch patternSplt[4] {
-	case "Iris-setosa":
+	var dataLabel: [Double] = [0.0, 0.0, 0.0]
+
+	switch patternSplt[6] {
+	case "DH":
 		dataLabel[0] = 1.0
 		break
-	case "Iris-versicolor":
+	case "SL":
 		dataLabel[1] = 1.0
 		break
 	default:
@@ -125,13 +119,18 @@ for pattern in patternsArr {
 	dataArr.append(Pattern(input: dataInput, label: dataLabel))
 }
 
+var testHits = 0.0
 for _ in 1...10{
 	dataArr.shuffle()
-
-	let trainDataArr = Array(dataArr[0..<120])
-	let testDataArr = Array(dataArr[120..<150])
-
-	let weights = train(dataArr: trainDataArr, learningRate: 0.1, epochsNumber: 80)
-
-	print("\n\(test(testDataArr, weights) * 100)%")
+	
+	let trainDataArr = Array(dataArr[0..<247])
+	let testDataArr = Array(dataArr[247..<310])
+	
+	let weights = train(dataArr: trainDataArr, learningRate: 0.1, epochsNumber: 100)
+	
+	let hitPercentual = test(testDataArr, weights) * 100
+	testHits += hitPercentual
+	print("\(hitPercentual)%\n")
 }
+
+print("\nAccurace: \(testHits/10)%")

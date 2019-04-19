@@ -6,5 +6,6 @@
         <page name='Iris-setosa'/>
         <page name='Perceptron-Multilayer'/>
         <page name='Iris'/>
+        <page name='Column'/>
     </pages>
 </playground>
