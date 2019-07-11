@@ -42,20 +42,24 @@ func train(dataArr: [DataObject], learningRate: Double, epochsNumber: Int) -> [D
                 weights[1] = weights[1] + learningRate * error * data.x
             }
         }
+        
+        if errors == 0 {
+            return weights
+        }
         epochs += 1
     }
     
     return weights
 }
 
-// y = x + 5
-let dataArr = [DataObject(x: -3, y: 2),
-               DataObject(x: -2, y: 3),
-               DataObject(x: -1, y: 4),
-               DataObject(x: 0, y: 5),
-               DataObject(x: 1, y: 6),
-               DataObject(x: 2, y: 7),
-               DataObject(x: 3, y: 8),
+// y = -2x + 1
+let dataArr = [DataObject(x: -3, y: 7),
+               DataObject(x: -2, y: 5),
+               DataObject(x: -1, y: 3),
+               DataObject(x: 0, y: 1),
+               DataObject(x: 1, y: -1),
+               DataObject(x: 2, y: -3),
+               DataObject(x: 3, y: -5),
 ]
 
 let weights = train(dataArr: dataArr, learningRate: 0.1, epochsNumber: 20)
