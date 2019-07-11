@@ -13,35 +13,20 @@ struct Pattern {
 }
 
 func predict(_ input: [Double], _ w: [[Double]]) -> [Double] {
-	var u: [Double] = [0, 0, 0]
-	var uArr: [Double] = [0, 0, 0]
+	var u: [Double] = [0.0, 0.0, 0.0]
+	var uArr: [Double] = [0.0, 0.0, 0.0]
 	
+    var maxUIndex = 0
 	for j in 0..<3 {
 		var aux = 0.0
 		for i in 0..<input.count {
 			aux += input[i] * w[j][i]
 		}
 		uArr[j] = aux
-		u[j] = aux > 0.0 ? 1.0 : 0.0
+        
+        maxUIndex = uArr[j] >= uArr[maxUIndex] ? j : maxUIndex
 	}
-	
-	let sum = u[0] + u[1] + u[2]
-	if sum != 1.0 {
-		var biggerI = 0
-		var bigger = uArr[0]
-		for i in 1..<uArr.count {
-			if uArr[i] > bigger {
-				bigger = uArr[i]
-				biggerI = i
-			}
-		}
-		u[biggerI] = 1.0
-		for i in 0..<u.count {
-			if i != biggerI {
-				u[i] = 0.0
-			}
-		}
-	}
+    u[maxUIndex] = 1.0
 	
 	return u
 }
@@ -71,9 +56,9 @@ func train(dataArr: [Pattern], learningRate: Double, epochsNumber: Int) -> [[Dou
 				}
 			}
 		}
-		if errors == 0 {
-			return w
-		}
+//        if errors == 0 {
+//            return w
+//        }
 	}
 	
 	return w
